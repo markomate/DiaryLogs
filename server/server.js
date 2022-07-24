@@ -5,7 +5,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 
 dotenv.config()
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 const dbConn = process.env.MONGODB_ATLAS
 const app = express()
 
