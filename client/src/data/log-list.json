@@ -1,0 +1,6 @@
+[
+    {"id": 1, "text": "First log", "user": "Marko"},
+    {"id": 2, "text": "Second log", "user": "Jasmina"},
+    {"id": 3, "text": "Third log", "user": "Anastasija"},
+    {"id": 4, "text": "Fourth log", "user": "Ashlyn"}
+]

@@ -1,21 +1,44 @@
-import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages';
-import SignUp from './pages/signup';
-import SignIn from './pages/signin';
+// import './App.css';
+import React from 'react'
+import LogForm from './components/LogForm';
+import Logs from './components/Logs';
+import Navigation from './components/Navigation'
+import LoginForm from './components/LoginForm'
+import { useState } from 'react'
+import initialLogList from './data/log-list.json'
 
-function App() {
+
+const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState("")
+  const [logList, setLogList] = useState(initialLogList)
+
+  const activateUser = (username) => {
+    setLoggedInUser(username)
+  }
+
+  const addLog = (text) => {
+    const log = {
+      text: text,
+      user: loggedInUser,
+      id: logList[logList.length - 1].id + 1
+    }
+    setLogList(
+      (logList) => [...logList, log]
+    )
+  }
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' exact element={<Home/>} />
-        <Route path='/signup' element={<SignUp/>} />
-        <Route path='/signin' element={<SignIn/>} />
-      </Routes>
-    </Router>
-  );
+    <div >
+          <h1>DiaryLogs</h1>
+          <Navigation loggedInUser={loggedInUser} activateUser={activateUser} />
+          { !loggedInUser ?
+            <LoginForm activateUser={activateUser} />
+            :
+            <LogForm loggedInUser={loggedInUser} addLog={addLog} /> 
+          }
+          <Logs logList={logList} />
+    </div>
+  )
 }
 
-export default App;
+export default App
