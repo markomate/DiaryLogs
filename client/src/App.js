@@ -1,7 +1,10 @@
-// import './App.css';
-import React from 'react'
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import LogForm from './components/LogForm';
 import Logs from './components/Logs';
+import LogDetail from './components/LogDetail';
+import About from './components/About'
+import NotFound from './components/NotFound';
 import Navigation from './components/Navigation'
 import LoginForm from './components/LoginForm'
 import { useState } from 'react'
@@ -27,16 +30,37 @@ const App = () => {
     )
   }
 
+  useEffect(
+    ()=>{
+      setLogList(initialLogList)
+    }
+    ,
+    []
+  )
+
   return (
+    
     <div >
           <h1>DiaryLogs</h1>
-          <Navigation loggedInUser={loggedInUser} activateUser={activateUser} />
-          { !loggedInUser ?
-            <LoginForm activateUser={activateUser} />
-            :
-            <LogForm loggedInUser={loggedInUser} addLog={addLog} /> 
-          }
-          <Logs logList={logList} />
+          <Router>
+            <Navigation loggedInUser={loggedInUser} activateUser={activateUser} />
+            <Routes>
+              <Route path="/" element={<Navigate to="logs" />} />
+              <Route path="logs">
+                <Route index element={<Logs logList={logList}/>}/>                
+                <Route path="new" element={
+                  loggedInUser ?
+                  <LogForm loggedInUser={loggedInUser} addLog={addLog} />
+                  :
+                  <Navigate to="/login" />
+                } />
+                <Route path=":logId" element={<LogDetail logList={logList} />} />
+              </Route>
+              <Route path="about" element={<About />} />
+              <Route path="login" element={<LoginForm activateUser={activateUser} />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const LogForm = ({loggedInUser, addLog}) => {
+    const navigate = useNavigate()
     const initialFormData = {
         text: ""
     }
@@ -22,6 +24,7 @@ const LogForm = ({loggedInUser, addLog}) => {
             console.log(formData)
             addLog(formData.text)
             cleanContent()
+            navigate("/logs")
         }
     }
 
