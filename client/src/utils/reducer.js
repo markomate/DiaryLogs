@@ -1,8 +1,12 @@
 export const reducer = (state, action) => {
+  console.log(state)
+  console.log(action)
+
   switch(action.type){
     case "cleanState": {
       // state goes back to default values
       return {
+        logList: [],
         loggedInUser: ""
       }
     }
@@ -13,11 +17,18 @@ export const reducer = (state, action) => {
         loggedInUser: action.data
       }
     }
-    case "setToken": {
-      // updates the token value
+    case "setLogList": {
+      // populate the logList Array with the initial values
       return {
         ...state,
-        token: action.data
+        logList: action.data
+      }
+    }
+    case "addLog": {
+      // populate the logList Array with the initial values
+      return {
+        ...state,
+        logList: [action.data, ...state.logList]
       }
     }
     default: return state
