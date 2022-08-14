@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const diarylogsAPI = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL
+  // baseURL: process.env.REACT_APP_BACKEND_URL
   // baseURL: 'http://localhost:5000'
+  baseURL: 'https://diarylogs.herokuapp.com/'
 })
 
 diarylogsAPI.interceptors.request.use(req => {
