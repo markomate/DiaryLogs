@@ -1,22 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import LogForm from './components/LogForm';
-import Logs from './components/Logs';
-import LogDetail from './components/LogDetail';
-import About from './components/About'
-import NotFound from './components/NotFound';
-import Navigation from './components/Navigation'
-import LoginForm from './components/LoginForm'
-import { useState } from 'react'
-import initialLogList from './data/log-list.json'
+import LogForm from './LogForm';
+import Logs from './Logs';
+import LogDetail from './LogDetail';
+import About from './About'
+import NotFound from './NotFound';
+import Navigation from './Navigation'
+import LoginForm from './LoginForm'
+import initialLogList from '../data/log-list.json'
+import { reducer } from '../utils/reducer'
 
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState("")
-  const [logList, setLogList] = useState(initialLogList)
+  const initialState = {
+    logList: [],
+    loggedInUser: ""
+  }
+
+  const [store, dispatch] = useReducer(reducer, initialState)
+  const {logList, loggedInUser} = store
 
   const activateUser = (username) => {
-    setLoggedInUser(username)
+    dispatch({
+      type: "setLoggedInUser",
+      data: username
+    })
   }
 
   const addLog = (text) => {
@@ -25,21 +33,24 @@ const App = () => {
       user: loggedInUser,
       id: logList[logList.length - 1].id + 1
     }
-    setLogList(
-      (logList) => [...logList, log]
-    )
+    dispatch({
+      type: "addLog",
+      data: log
+    })
   }
 
   useEffect(
     ()=>{
-      setLogList(initialLogList)
+      dispatch({
+        type: "setLogList",
+        data: initialLogList
+      })
     }
     ,
     []
   )
 
   return (
-    
     <div >
           <h1>DiaryLogs</h1>
           <Router>
