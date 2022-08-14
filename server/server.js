@@ -3,8 +3,9 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
-import logsRoutes from "./routes/logs.js";
+import router from './routes/logs-routes.js'
+import { authRouter } from "./routes/auth-routes.js"
+import jwt from 'jsonwebtoken'
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -14,8 +15,6 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-app.use("/logs", logsRoutes);
 
 mongoose.connect(dbConn, {}, (err) => {
   if (err) {
@@ -29,6 +28,22 @@ app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello from Express!");
-});
+app.use((req, res, next) => {
+  if(req.headers && req.headers.authorization) {
+    console.log("Auth:", req.headers.authorization.split(" ")[1])
+    jwt.verify(req.headers.authorization.split(" ")[1], "bob", (err, user) => {
+      if (err) {
+        req.user = undefined
+      } else {
+        console.log("Decode:", user)
+        req.user = user
+      }
+      next()
+    })
+  } else {
+    req.user = undefined
+    next()
+  }
+})
+app.use("/auth", authRouter)
+app.use("/", router)
