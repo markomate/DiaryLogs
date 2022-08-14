@@ -1,7 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useGlobalState } from "../utils/stateContext"
+import Button from '@mui/material/Button';
+import { createLog } from "../services/logsServices";
 
-const LogForm = ({loggedInUser, addLog}) => {
+const LogForm = () => {
+    const {store, dispatch} = useGlobalState()
+    const {loggedInUser} = store
     const navigate = useNavigate()
     const initialFormData = {
         text: ""
@@ -22,13 +27,23 @@ const LogForm = ({loggedInUser, addLog}) => {
             console.log("empty log")
         }else {
             console.log(formData)
-            addLog(formData.text)
-            cleanContent()
+            addLog(formData)
+            cleanMessage()
             navigate("/logs")
         }
     }
+    
+    const addLog = (data) => {
+        createLog(data)
+        .then(log => {
+            dispatch({
+            type: "addLog",
+            data: log
+            })            
+        })
+      }
 
-    const cleanContent = () => {
+    const cleanMessage = () => {
         setFormData(initialFormData)
     }
 
@@ -36,10 +51,10 @@ const LogForm = ({loggedInUser, addLog}) => {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <textarea type="text" name="text" id="text" placeholder={`What would you like to log ${loggedInUser}?`} value={formData.text} onChange={handleFormData} />
+                    <textarea type="text" name="text" id="text" placeholder={`What's on your mind ${loggedInUser}?`} value={formData.text} onChange={handleFormData} />
                 </div>
-                <input type="submit" value="Post" />
-                <button onClick={cleanContent}>Clear</button>
+                <Button variant="contained" type="submit">Post</Button>
+                <Button onClick={cleanMessage}>Clean message</Button>
             </form>
         </>
     )

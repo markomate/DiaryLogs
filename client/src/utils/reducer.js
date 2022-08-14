@@ -1,5 +1,5 @@
 export const reducer = (state, action) => {
-  console.log(state)
+  // console.log(state)
   console.log(action)
 
   switch(action.type){
@@ -15,6 +15,13 @@ export const reducer = (state, action) => {
       return {
         ...state,
         loggedInUser: action.data
+      }
+    }
+    case "setToken": {
+      // updates the token value
+      return {
+        ...state,
+        token: action.data
       }
     }
     case "setLogList": {
