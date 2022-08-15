@@ -28,7 +28,6 @@ const LoginForm = () => {
         data: jwt,
       });
     });
-
     setFormData(initialFormData);
     navigate("/");
   };

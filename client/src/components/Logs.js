@@ -3,11 +3,14 @@ import Log from './Log'
 
 const Logs = () => {
     const {store} = useGlobalState()
-    const {logList} = store
+    const {logList, loggedInUser} = store
+
+    const userList = logList.filter(log => log.username === loggedInUser)
+
     return (
         <>
-            {logList.map(log => 
-                    <Log key={log.id} log={log}/>
+            {userList.map(log =>
+               <Log key={log.id} log={log}/>
             )}
         </>
     )

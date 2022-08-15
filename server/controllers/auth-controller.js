@@ -13,7 +13,7 @@ export const signUp = (req, res) => {
       return res.json({error: err.message})
     } else {
       res.status(201)
-      const token = jwt.sign({username: user.username, email: user.email, id: user._id}, "bob")
+      const token = jwt.sign({username: user.username, email: user.email, id: user._id}, process.env.SECRET_KEY)
       return res.json({username: user.username, jwt: token})
     }
   })
@@ -30,7 +30,7 @@ export const signIn = (req, res) => {
       return res.json({error: "Authentication failed"})
     } else {
       res.status(200)
-      const token = jwt.sign({username: user.username, email: user.email, id: user._id}, "bob")
+      const token = jwt.sign({username: user.username, email: user.email, id: user._id}, process.env.SECRET_KEY)
       return res.json({username: user.username, jwt: token})
     }
   })
@@ -38,7 +38,17 @@ export const signIn = (req, res) => {
 
 export const loginRequired = (req, res, next) => {
   if (req.user) {
+    console.log(req.user.id)
     next()
+  } else {
+    res.status(401)
+    return res.json({error: "Unauthorised operation"})
+  }
+}
+
+export const authID = (req, res) => {
+  if (req.user) {
+    return req.user.id
   } else {
     res.status(401)
     return res.json({error: "Unauthorised operation"})

@@ -29,19 +29,10 @@ const App = () => {
 
   useEffect(
     ()=>{
-      // axios.get("http://localhost:4000/messages")
-      // .then(response => {
-      //   console.log(response.data)
-      //   dispatch({
-      //     type: "setMessageList",
-      //     data: response.data
-      //   })
-      // })
-      //setMessageList(initialMessageList)
       getLogs()
       .then(logs => {
         dispatch({
-          type: "setLogsList",
+          type: "setLogList",
           data: logs
         })
       })

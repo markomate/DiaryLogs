@@ -29,6 +29,7 @@ const Navigation = () => {
                     { !loggedInUser && <Tab label="Login" component={Link} to="/login" />}
                     { !loggedInUser && <Tab label="Signup" component={Link} to="/signup" />}
                 </Tabs>
+                { loggedInUser && <Typography variant='body1'>Hello, {loggedInUser}</Typography>}
             </Toolbar>
         </AppBar>
     )

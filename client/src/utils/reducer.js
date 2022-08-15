@@ -25,14 +25,14 @@ export const reducer = (state, action) => {
       }
     }
     case "setLogList": {
-      // populate the logList Array with the initial values
+      // populates the logList Array with the models values
       return {
         ...state,
         logList: action.data
       }
     }
     case "addLog": {
-      // populate the logList Array with the initial values
+      // adds an object to to the logList array
       return {
         ...state,
         logList: [action.data, ...state.logList]

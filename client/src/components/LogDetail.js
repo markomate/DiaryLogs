@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom"
 import { useGlobalState } from "../utils/stateContext"
 import { Card, CardContent, Typography } from "@mui/material"
 
-
 const LogDetail = () => {
     const {store} = useGlobalState()
     const {logList} = store
@@ -11,9 +10,11 @@ const LogDetail = () => {
     // console.log(params)
 
     const getLog = (id) => {
-        return logList.find(l => l.id === parseInt(id))
+        return logList.find(l => l.id === id)
     }
+
     const log = getLog(params.logId)
+
     return (
         <>
             { log ?

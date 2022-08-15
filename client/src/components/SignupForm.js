@@ -36,7 +36,7 @@ const SignupForm = () => {
         })
         .catch(e => {console.log(e)})
         setFormData(initialFormData)
-        navigate("/logs")
+        navigate("/")
     }
 
     const handleFormData = (e) => {
