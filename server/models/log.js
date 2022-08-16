@@ -6,17 +6,17 @@ export const logSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  text: {
+  comment: {
     type: String,
-    required: true
+    // required: true
   },
   startTime: {
-    type: Object,
-    required: true
+    type: Date,
+    // required: true
   },
   finishTime: {
-    type: Object,
-    required: true
+    type: Date,
+    // required: true
   },
   posted: {
     type: Date,

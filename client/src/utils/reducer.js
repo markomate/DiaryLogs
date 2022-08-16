@@ -1,6 +1,6 @@
 export const reducer = (state, action) => {
   // console.log(state)
-  console.log(action)
+  // console.log(action)
 
   switch(action.type){
     case "cleanState": {

@@ -29,7 +29,7 @@ const LoginForm = () => {
       });
     });
     setFormData(initialFormData);
-    navigate("/");
+    navigate("/logs");
   };
 
   const handleFormData = (e) => {
