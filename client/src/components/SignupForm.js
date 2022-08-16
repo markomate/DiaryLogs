@@ -48,7 +48,7 @@ const SignupForm = () => {
 
     return (
         <>
-            <Typography variant='h5'>Register user</Typography>
+            <Typography variant='h5'>Register</Typography>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <InputLabel>Name:</InputLabel>
