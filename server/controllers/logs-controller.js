@@ -52,7 +52,7 @@ export const updateLog = (req, res) => {
   changeLog(req.params.id, req.body).exec((err, log) => {
     if (err) {
       res.status(404)
-      return res.json({error: err.log})
+      return res.json({error: "Error"})
     } else {
       res.status(200)
       res.send(log)

@@ -30,12 +30,11 @@ app.listen(PORT, () => {
 
 app.use((req, res, next) => {
   if(req.headers && req.headers.authorization) {
-    // console.log("Auth:", req.headers.authorization.split(" ")[1])
+    // verifies bearer token 
     jwt.verify(req.headers.authorization.split(" ")[1], process.env.SECRET_KEY, (err, user) => {
       if (err) {
         req.user = undefined
       } else {
-        // console.log("Decode:", user)
         req.user = user
       }
       next()
@@ -45,5 +44,6 @@ app.use((req, res, next) => {
     next()
   }
 })
+
 app.use("/auth", authRouter)
 app.use("/", router)

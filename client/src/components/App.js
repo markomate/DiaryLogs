@@ -5,8 +5,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import LogForm from "./LogForm";
 import Logs from "./Logs";
+import LogForm from "./LogForm";
 import LogDetail from "./LogDetail";
 import About from "./About";
 import Info from "./Info";

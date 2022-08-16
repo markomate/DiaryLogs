@@ -1,8 +1,8 @@
 import diarylogsAPI from "../config/api";
 
-export async function getLogs(){
-  const response = await diarylogsAPI.get('/logs')
-  return response.data
+export async function getLogs() {
+  const response = await diarylogsAPI.get("/logs");
+  return response.data;
 }
 
 export async function createLog(data){

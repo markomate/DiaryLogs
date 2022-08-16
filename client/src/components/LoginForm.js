@@ -16,7 +16,8 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signIn(formData).then(({ username, jwt }) => {
+    signIn(formData)
+    .then(({ username, jwt }) => {
       sessionStorage.setItem("username", username);
       sessionStorage.setItem("token", jwt);
       dispatch({
@@ -27,7 +28,8 @@ const LoginForm = () => {
         type: "setToken",
         data: jwt,
       });
-    });
+    })
+    .catch(err => console.log(err))
     setFormData(initialFormData);
     navigate("/logs");
   };
@@ -73,4 +75,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginForm
