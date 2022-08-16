@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Button, Typography, InputLabel, TextField } from "@mui/material";
 import { signIn } from "../services/authServices";
-// import Oauth from "../pages/signin";
 
 const LoginForm = () => {
   const { dispatch } = useGlobalState();
@@ -44,7 +43,8 @@ const LoginForm = () => {
 
   return (
     <>
-      <Typography variant="h5">Log in</Typography>
+      <Typography variant="h5" className="Title">Log in</Typography>
+      <div className="Form-Container">
       <form onSubmit={handleSubmit}>
         <div>
           <InputLabel>Email:</InputLabel>
@@ -70,7 +70,7 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
-      {/* <Oauth /> */}
+      </div>
     </>
   );
 };

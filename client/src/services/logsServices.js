@@ -5,9 +5,9 @@ export async function getLogs() {
   return response.data;
 }
 
-export async function createLog(data) {
-  const response = await diarylogsAPI.post("/logs", data);
-  return response.data;
+export async function createLog(data){
+  const response = await diarylogsAPI.post('/logs', data)
+  return response.data
 }
 
 export async function updateLog(id, data) {

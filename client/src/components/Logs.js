@@ -8,11 +8,11 @@ const Logs = () => {
     const userList = logList.filter(log => log.username === loggedInUser)
 
     return (
-        <>
+        <div className='Card'>
             {userList.map(log =>
                <Log key={log.id} log={log}/>
             )}
-        </>
+        </div>
     )
 }
 export default Logs

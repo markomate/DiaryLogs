@@ -45,12 +45,3 @@ export const loginRequired = (req, res, next) => {
     return res.json({error: "Unauthorised operation"})
   }
 }
-
-export const authID = (req, res) => {
-  if (req.user) {
-    return req.user.id
-  } else {
-    res.status(401)
-    return res.json({error: "Unauthorised operation"})
-  }
-}

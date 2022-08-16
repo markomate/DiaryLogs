@@ -1,7 +1,7 @@
 const Info = () => {
     return(
         <>
-            <p>Create an account for your own Diary to Log :)</p>
+            <h3 className="Title">Create an account for your own Diary to Log!</h3>
         </>
     )
 }

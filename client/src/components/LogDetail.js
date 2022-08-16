@@ -32,26 +32,34 @@ const LogDetail = () => {
   }
 
   const log = getLog(params.logId);
-
+  
   return (
     <>
       {log ? (
-        <Card>
-            <CardContent>
-              <Typography variant="body1">
-                Start time: <Moment>{log.startTime}</Moment>
-              </Typography>
-              <Typography variant="body1">
-                Finish time: <Moment>{log.finishTime}</Moment>
-              </Typography>
-              <Typography variant="body1">Commment: {log.comment}</Typography>
-              <Typography variant="caption">
-                Log created: <Moment>{log.posted}</Moment>
-              </Typography>
-            </CardContent>
-            <Button variant="contained" onClick={editLog}>Edit</Button>
-            <Button>Back</Button>
-            <Button variant="contained" onClick={deleteLog}>Delete</Button>
+        <Card className="Card">
+          <CardContent>
+            <Typography variant="body1">
+              Start time: <Moment>{log.startTime}</Moment>
+            </Typography>
+            <Typography variant="body1">
+              Finish time: <Moment>{log.finishTime}</Moment>
+            </Typography>
+            <Typography variant="body2">Comment: {log.comment}</Typography>
+            <Typography variant="caption">
+              Created at: <Moment>{log.posted}</Moment>
+            </Typography>
+          </CardContent>
+          <div className="Button">
+            <Button variant="contained" onClick={editLog} color="secondary">
+              Edit
+            </Button>
+            <Button variant="outlined" href="/" color="secondary">
+              Back
+            </Button>
+            <Button variant="contained" onClick={deleteLog} color="secondary">
+              Delete
+            </Button>
+          </div>
         </Card>
       ) : (
         <>
