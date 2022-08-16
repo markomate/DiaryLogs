@@ -31,7 +31,7 @@ const theme = createTheme({
   },
 });
 
-Moment.globalFormat = "HH:mma - DD/MM/YY";
+Moment.globalFormat = "hh:mma - DD/MM/YY";
 
 const App = () => {
   const initialState = {
@@ -82,6 +82,7 @@ const App = () => {
                   }
                 />
                 <Route path=":logId" element={<LogDetail />} />
+                <Route path="edit/:logId" element={<LogForm />} />
               </Route>
               <Route path="about" element={<About />} />
               <Route path="info" element={<Info />} />
