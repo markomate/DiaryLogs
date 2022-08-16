@@ -4,7 +4,57 @@
   padding: 0;
 }
 
+.Logo {
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+}
+
+.Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.Button {
+  padding: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.Padding {
+  padding: 10;
+}
+
+.Card {
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh;
+}
+
+.Center-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.Form-Container {
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+  padding-top: 5vh;
+}
+
 a.card {
   text-decoration: none;
   color: inherit;
+}
+
+@media only screen and (max-width: 600px) {
+  .Button {
+    justify-content: space-between;
+  }
 }

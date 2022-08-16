@@ -34,16 +34,10 @@ const LogForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (formData.text === ""){
-    //     console.log("empty log")
-    //     console.log(formData)
-    // }else {
-    console.log(formData);
     addLog(formData);
     clearLog();
     navigate("/logs");
   };
-  // }
 
   const addLog = (data) => {
     createLog(data).then((log) => {
@@ -59,13 +53,10 @@ const LogForm = () => {
   };
 
   return (
-    <>
+    <div className="Center-Container">
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "50ch" },
-        }}
       >
         <Stack noValidate spacing={3} paddingTop="20px">
           <TextField
@@ -102,14 +93,16 @@ const LogForm = () => {
             value={formData.comment}
             onChange={handleFormData}
             multiline
+            sx={{ width: 300, paddingTop: 3}}
           />
         </div>
-        <Button variant="contained" type="submit">
-          Post
+        <div className="Button">        
+          <Button variant="contained" type="submit" color="secondary">
+          Log
         </Button>
-        <Button onClick={clearLog}>Clear</Button>
+        <Button variant="outlined"onClick={clearLog}>Clear</Button></div>
       </Box>
-    </>
+    </div>
   );
 };
 

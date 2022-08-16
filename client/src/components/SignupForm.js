@@ -48,7 +48,8 @@ const SignupForm = () => {
 
     return (
         <>
-            <Typography variant='h5'>Register</Typography>
+            <Typography variant='h5' className="Title">Register</Typography>
+            < div className="Form-Container">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <InputLabel>Name:</InputLabel>
@@ -66,10 +67,10 @@ const SignupForm = () => {
                         <InputLabel>Password confirmation:</InputLabel>
                         <TextField type="password" name="password_confirmation" id="password_confirmation" value={formData.password_confirmation} onChange={handleFormData} />
                     </div>
-
-                    <Button variant="contained" type="submit">Sign Up</Button>
+                    <div className="Button"><Button variant="contained" type="submit">Sign Up</Button></div>
                 </form>
-        </>
+        </div>
+    </>
     )
 }
 

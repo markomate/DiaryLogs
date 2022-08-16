@@ -13,9 +13,9 @@ const Log = ({log}) => {
                     <Typography variant='body1'>
                         Finish time: <Moment>{log.finishTime}</Moment>
                     </Typography>
-                    <Typography variant='body1'>Commment: {log.comment}</Typography>
+                    <Typography variant='body2'>Comment: {log.comment}</Typography>
                     <Typography variant='caption'>
-                        Log created: <Moment>{log.posted}</Moment>
+                        Created at: <Moment>{log.posted}</Moment>
                     </Typography>
                 </CardContent>
             </Link>

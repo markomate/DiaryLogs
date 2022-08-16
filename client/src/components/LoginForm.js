@@ -41,7 +41,8 @@ const LoginForm = () => {
 
   return (
     <>
-      <Typography variant="h5">Log in</Typography>
+      <Typography variant="h5" className="Title">Log in</Typography>
+      <div className="Form-Container">
       <form onSubmit={handleSubmit}>
         <div>
           <InputLabel>Email:</InputLabel>
@@ -67,6 +68,7 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
+      </div>
     </>
   );
 };

@@ -18,11 +18,12 @@ const LogDetail = () => {
     return (
         <>
             { log ?
-                <Card>
+                <Card className="Card">
                     <CardContent>
-                        <Typography variant='body2'>{log.comment}</Typography>
-                        <Typography variant='h5'>{log.username}</Typography>
-                        <Typography variant='body1'><Moment>{log.posted}</Moment></Typography>
+                        <Typography variant='body1'>Start time: <Moment>{log.startTime}</Moment></Typography>
+                        <Typography variant='body1'>Finish time: <Moment>{log.finishTime}</Moment></Typography>
+                        <Typography variant='body2'>Comment: {log.comment}</Typography>
+                        <Typography variant='caption'>Created at: <Moment>{log.posted}</Moment></Typography>
                     </CardContent>
                 </Card>
                 :
