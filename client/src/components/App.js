@@ -5,8 +5,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import LogForm from "./LogForm";
 import Logs from "./Logs";
+import LogForm from "./LogForm";
 import LogDetail from "./LogDetail";
 import About from "./About";
 import Info from "./Info";
@@ -19,7 +19,7 @@ import { StateContext } from "../utils/stateContext";
 import { getLogs } from "../services/logsServices";
 import Moment from "react-moment";
 
-Moment.globalFormat = "HH:mma - DD/MM/YY";
+Moment.globalFormat = "hh:mma - DD/MM/YY";
 
 const App = () => {
   const initialState = {
@@ -63,6 +63,7 @@ const App = () => {
                 element={loggedInUser ? <LogForm /> : <Navigate to="/login" />}
               />
               <Route path=":logId" element={<LogDetail />} />
+              <Route path="edit/:logId" element={<LogForm />} />
             </Route>
             <Route path="about" element={<About />} />
             <Route path="info" element={<Info />} />

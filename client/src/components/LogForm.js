@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import Button from "@mui/material/Button";
-import { createLog } from "../services/logsServices";
+import { createLog, updateLog } from "../services/logsServices";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -12,9 +12,11 @@ const LogForm = () => {
   const { store, dispatch } = useGlobalState();
   const { loggedInUser } = store;
   const navigate = useNavigate();
-  //   const setTime = Date.now().toString()
+  const location = useLocation();
+  const url = location.pathname
+  // console.log(location.pathname)
   const initialFormData = {
-    text: "",
+    comment: "",
     startTime: "",
     finishTime: ""
   };
@@ -34,22 +36,33 @@ const LogForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (formData.text === ""){
-    //     console.log("empty log")
-    //     console.log(formData)
-    // }else {
-    console.log(formData);
-    addLog(formData);
-    clearLog();
-    navigate("/logs");
+    // console.log(formData);
+    if (url === '/logs/new') {
+      addLog(formData);
+      clearLog();
+      navigate("/logs");
+    } else {
+      let id = location.pathname.slice(11)
+      editLog(id, formData);
+      clearLog();
+      navigate("/logs");
+    }
   };
-  // }
 
   const addLog = (data) => {
     createLog(data).then((log) => {
       dispatch({
         type: "addLog",
         data: log,
+      });
+    });
+  };
+
+  const editLog = (id, data) => {
+    updateLog(id, data).then((log) => {
+      dispatch({
+        type: "editLog",
+        data: log
       });
     });
   };

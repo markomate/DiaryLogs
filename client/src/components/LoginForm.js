@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Button, Typography, InputLabel, TextField } from "@mui/material";
 import { signIn } from "../services/authServices";
+// import Oauth from "../pages/signin";
 
 const LoginForm = () => {
   const { dispatch } = useGlobalState();
@@ -16,7 +17,8 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signIn(formData).then(({ username, jwt }) => {
+    signIn(formData)
+    .then(({ username, jwt }) => {
       sessionStorage.setItem("username", username);
       sessionStorage.setItem("token", jwt);
       dispatch({
@@ -27,7 +29,8 @@ const LoginForm = () => {
         type: "setToken",
         data: jwt,
       });
-    });
+    })
+    .catch(err => console.log(err))
     setFormData(initialFormData);
     navigate("/logs");
   };
@@ -67,8 +70,9 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
+      {/* <Oauth /> */}
     </>
   );
 };
 
-export default LoginForm;
+export default LoginForm
