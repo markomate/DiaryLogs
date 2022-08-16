@@ -35,9 +35,29 @@ export const reducer = (state, action) => {
       // adds an object to to the logList array
       return {
         ...state,
-        logList: [action.data, ...state.logList]
-      }
+        logList: [action.data, ...state.logList],
+      };
     }
-    default: return state
+    case "editLog": {
+      // edits the selected log and removes the original from the list
+      let updatedList = state.logList.filter(
+        (log) => log.id !== action.data.id
+      );
+      return {
+        ...state,
+        logList: [action.data, ...updatedList],
+      };
+    }
+    case "deleteLog": {
+      // deletes a log from the logList array based on it's ID
+      // updates logList with the new array
+      let updatedList = state.logList.filter((log) => log.id !== action.data);
+      return {
+        ...state,
+        logList: updatedList,
+      };
+    }
+    default:
+      return state;
   }
-}
+};
