@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import router from './routes/logs-routes.js'
 import { authRouter } from "./routes/auth-routes.js"
 import jwt from 'jsonwebtoken'
+
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+mongoose.set('strictQuery', false);
 mongoose.connect(dbConn, {}, (err) => {
   if (err) {
     console.log(err, "Database error!");
