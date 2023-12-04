@@ -13,7 +13,7 @@ const SignupForm = () => {
         username: "",
         email:"",
         password: "",
-        password_confirmation: ""
+        confirmPassword: ""
     }
 
     const [formData, setFormData] = useState(initialFormData)
@@ -65,7 +65,7 @@ const SignupForm = () => {
                     </div>
                     <div>
                         <InputLabel>Password confirmation:</InputLabel>
-                        <TextField type="password" name="password_confirmation" id="password_confirmation" value={formData.password_confirmation} onChange={handleFormData} />
+                        <TextField type="password" name="confirmPassword" id="confirmPassword" value={formData.password_confirmation} onChange={handleFormData} />
                     </div>
                     <div className="Button"><Button variant="contained" type="submit">Sign Up</Button></div>
                 </form>

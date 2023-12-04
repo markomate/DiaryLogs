@@ -13,25 +13,31 @@ const LoginForm = () => {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [apiError, setApiError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setApiError(null);
     signIn(formData)
-    .then(({ username, jwt }) => {
-      sessionStorage.setItem("username", username);
-      sessionStorage.setItem("token", jwt);
-      dispatch({
-        type: "setLoggedInUser",
-        data: username,
+      .then(({ username, jwt }) => {
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("token", jwt);
+        dispatch({
+          type: "setLoggedInUser",
+          data: username,
+        });
+        dispatch({
+          type: "setToken",
+          data: jwt,
+        });
+        navigate("/logs");
+      })
+      .catch((err) => {
+        console.log(err);
+        setApiError("Incorrect password.");
       });
-      dispatch({
-        type: "setToken",
-        data: jwt,
-      });
-    })
-    .catch(err => console.log(err))
-    setFormData(initialFormData);
-    navigate("/logs");
+    // setFormData(initialFormData);
+    // navigate("/logs");
   };
 
   const handleFormData = (e) => {
@@ -39,40 +45,44 @@ const LoginForm = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setApiError(null);
   };
 
   return (
     <>
-      <Typography variant="h5" className="Title">Log in</Typography>
+      <Typography variant="h5" className="Title">
+        Log in
+      </Typography>
       <div className="Form-Container">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <InputLabel>Email:</InputLabel>
-          <TextField
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handleFormData}
-          />
-        </div>
-        <div>
-          <InputLabel>Password:</InputLabel>
-          <TextField
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={handleFormData}
-          />
-        </div>
-        <Button variant="contained" type="submit">
-          Login
-        </Button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <InputLabel>Email:</InputLabel>
+            <TextField
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleFormData}
+            />
+          </div>
+          <div>
+            <InputLabel>Password:</InputLabel>
+            <TextField
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleFormData}
+            />
+          </div>
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
+          {apiError && <div>{apiError}</div>}
+        </form>
       </div>
     </>
   );
 };
 
-export default LoginForm
+export default LoginForm;
