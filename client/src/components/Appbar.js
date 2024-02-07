@@ -1,38 +1,27 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from "react-router-dom"
-import { useGlobalState } from "../utils/stateContext"
-import Logo from '../images/Logo2.png'
-
+import * as React from "react";
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalState } from "../utils/stateContext";
+import Logo from "../images/Logo2.png";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const {store, dispatch} = useGlobalState()
-  const {loggedInUser} = store
-  const navigate = useNavigate()
+  const { store, dispatch } = useGlobalState();
+  const { loggedInUser } = store;
+  const navigate = useNavigate();
 
   const logout = (e) => {
-      e.preventDefault()
-      sessionStorage.clear()
-      dispatch({
-          type: "setLoggedInUser",
-          data: null
-        })
-      navigate("/")
-  }
+    e.preventDefault();
+    sessionStorage.clear();
+    dispatch({
+      type: "setLoggedInUser",
+      data: null,
+    });
+    navigate("/");
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -53,25 +42,25 @@ const ResponsiveAppBar = () => {
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <img src={Logo} alt="Logo" className='Logo' />
+          <img src={Logo} alt="Logo" className="Logo" />
           <Typography
             variant="h6"
             noWrap
             component={Link}
             to="/"
             sx={{
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: "none", md: "flex" },
               fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
               paddingLeft: 5,
-              paddingRight: 5
+              paddingRight: 5,
             }}
           >
             DiaryLogs
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -86,29 +75,44 @@ const ResponsiveAppBar = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
-                <MenuItem label="Home" onClick={handleCloseNavMenu} component={Link} to="/" >
-                  <Typography textAlign="center">Home</Typography>
-                </MenuItem>
-                <MenuItem label="About" onClick={handleCloseNavMenu} component={Link} to="/about" >
-                  <Typography textAlign="center">About</Typography>
-                </MenuItem>
-                <MenuItem label="New Log" onClick={handleCloseNavMenu} component={Link} to="/logs/new" >
-                  <Typography textAlign="center">New Log</Typography>
-                </MenuItem>
+              <MenuItem
+                label="Home"
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/"
+              >
+                <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem
+                label="About"
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/about"
+              >
+                <Typography textAlign="center">About</Typography>
+              </MenuItem>
+              <MenuItem
+                label="New Log"
+                onClick={handleCloseNavMenu}
+                component={Link}
+                to="/logs/new"
+              >
+                <Typography textAlign="center">New Log</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -117,72 +121,100 @@ const ResponsiveAppBar = () => {
             component="a"
             href="/"
             sx={{
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               fontWeight: 700,
-              letterSpacing: '.1rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              paddingRight: 10
+              letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
+              paddingRight: 10,
             }}
           >
             DiaryLogs
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'flex' } }}>
-              <Button
-                onClick={handleCloseNavMenu}
-                component={Link} 
-                to="/"
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Home
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                component={Link} 
-                to="/about"
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                About
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                component={Link} 
-                to="/logs/new"
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                New log
-              </Button>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "none", md: "flex" },
+            }}
+          >
+            <Button
+              onClick={handleCloseNavMenu}
+              component={Link}
+              to="/"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Home
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              component={Link}
+              to="/about"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              About
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              component={Link}
+              to="/logs/new"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              New log
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              { loggedInUser && <Avatar>{loggedInUser[0]}</Avatar> }
+                {loggedInUser && <Avatar>{loggedInUser[0]}</Avatar>}
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem onClick={logout}>
-                  <Typography textAlign="center">Log out</Typography>
-                </MenuItem>
+              <MenuItem onClick={logout}>
+                <Typography textAlign="center">Log out</Typography>
+              </MenuItem>
             </Menu>
           </Box>
-            { !loggedInUser && <div><Button variant="outlined" color="secondary" sx={{ p: 0 }} component={Link} to="/login">Log In</Button></div> }
-            { !loggedInUser && <div className='Padding'><Button variant="contained" color='secondary' sx={{ p: 0 }} component={Link} to="/signup">Sign Up</Button></div> }
-            
+          {!loggedInUser && (
+            <div>
+              <Button
+                variant="outlined"
+                color="secondary"
+                sx={{ p: 0 }}
+                component={Link}
+                to="/login"
+              >
+                Log In
+              </Button>
+            </div>
+          )}
+          {!loggedInUser && (
+            <div className="Padding">
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ p: 0 }}
+                component={Link}
+                to="/signup"
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

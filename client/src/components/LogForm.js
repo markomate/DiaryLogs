@@ -13,12 +13,12 @@ const LogForm = () => {
   const { loggedInUser } = store;
   const navigate = useNavigate();
   const location = useLocation();
-  const url = location.pathname
+  const url = location.pathname;
   // console.log(location.pathname)
   const initialFormData = {
     comment: "",
     startTime: "",
-    finishTime: ""
+    finishTime: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -37,12 +37,12 @@ const LogForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(formData);
-    if (url === '/logs/new') {
+    if (url === "/logs/new") {
       addLog(formData);
       clearLog();
       navigate("/logs");
     } else {
-      let id = location.pathname.slice(11)
+      let id = location.pathname.slice(11);
       editLog(id, formData);
       clearLog();
       navigate("/logs");
@@ -62,7 +62,7 @@ const LogForm = () => {
     updateLog(id, data).then((log) => {
       dispatch({
         type: "editLog",
-        data: log
+        data: log,
       });
     });
   };
@@ -73,11 +73,8 @@ const LogForm = () => {
 
   return (
     <div className="Center-Container">
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-      >
-        <Stack noValidate spacing={3} paddingTop="20px">
+      <Box component="form" onSubmit={handleSubmit}>
+        <Stack noValidate spacing={3} marginTop="10rem">
           <TextField
             id="datetime-local-start"
             label="Start time"
@@ -112,14 +109,17 @@ const LogForm = () => {
             value={formData.comment}
             onChange={handleFormData}
             multiline
-            sx={{ width: 300, paddingTop: 3}}
+            sx={{ width: 300, paddingTop: 3 }}
           />
         </div>
-        <div className="Button">        
+        <div className="Button">
           <Button variant="contained" type="submit" color="secondary">
-          Log
-        </Button>
-        <Button variant="outlined"onClick={clearLog}>Clear</Button></div>
+            Log
+          </Button>
+          <Button variant="outlined" onClick={clearLog}>
+            Clear
+          </Button>
+        </div>
       </Box>
     </div>
   );
