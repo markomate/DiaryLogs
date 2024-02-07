@@ -19,11 +19,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    console.log(formData);
-=======
     setApiError(null);
->>>>>>> main
     signIn(formData)
       .then(({ username, jwt }) => {
         sessionStorage.setItem("username", username);
@@ -36,21 +32,12 @@ const LoginForm = () => {
           type: "setToken",
           data: jwt,
         });
-<<<<<<< HEAD
-      })
-      .catch((err) => console.log(err));
-    setFormData(initialFormData);
-    navigate("/logs");
-=======
         navigate("/logs");
       })
       .catch((err) => {
         console.log(err);
         setApiError("Incorrect password.");
       });
-    // setFormData(initialFormData);
-    // navigate("/logs");
->>>>>>> main
   };
 
   const handleFormData = (e) => {
@@ -63,7 +50,6 @@ const LoginForm = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <Box className="Center-Container">
         <Paper elevation={3} className="Paper" square={false}>
           <Typography variant="h5" className="Title">
@@ -96,45 +82,13 @@ const LoginForm = () => {
               <div className="Padding">
               <Button fullWidth variant="contained" type="submit">
                 Login
-              </Button>   
+              </Button>
+              {apiError && <div>{apiError}</div>}   
               </div>
             </form>
           </div>
         </Paper>
       </Box>
-=======
-      <Typography variant="h5" className="Title">
-        Log in
-      </Typography>
-      <div className="Form-Container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <InputLabel>Email:</InputLabel>
-            <TextField
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleFormData}
-            />
-          </div>
-          <div>
-            <InputLabel>Password:</InputLabel>
-            <TextField
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleFormData}
-            />
-          </div>
-          <Button variant="contained" type="submit">
-            Login
-          </Button>
-          {apiError && <div>{apiError}</div>}
-        </form>
-      </div>
->>>>>>> main
     </>
   );
 };
