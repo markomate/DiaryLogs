@@ -31,7 +31,16 @@ const SignupForm = () => {
     mode: "onBlur",
   });
 
+<<<<<<< HEAD
   console.log(errors);
+=======
+    const initialFormData = {
+        username: "",
+        email:"",
+        password: "",
+        confirmPassword: ""
+    }
+>>>>>>> main
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -61,6 +70,7 @@ const SignupForm = () => {
     navigate("/");
   };
 
+<<<<<<< HEAD
   return (
     <>
       <Box className="Center-Container">
@@ -202,6 +212,32 @@ const SignupForm = () => {
           </form>
         </Paper>
       </Box>
+=======
+    return (
+        <>
+            <Typography variant='h5' className="Title">Register</Typography>
+            < div className="Form-Container">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <InputLabel>Name:</InputLabel>
+                        <TextField type="text" name="username" id="username" value={formData.username} onChange={handleFormData} />
+                    </div>
+                    <div>
+                        <InputLabel>Email:</InputLabel>
+                        <TextField type="text" name="email" id="email" value={formData.email} onChange={handleFormData} />
+                    </div>
+                    <div>
+                        <InputLabel>Password:</InputLabel>
+                        <TextField type="password" name="password" id="password" value={formData.password} onChange={handleFormData} />
+                    </div>
+                    <div>
+                        <InputLabel>Password confirmation:</InputLabel>
+                        <TextField type="password" name="confirmPassword" id="confirmPassword" value={formData.password_confirmation} onChange={handleFormData} />
+                    </div>
+                    <div className="Button"><Button variant="contained" type="submit">Sign Up</Button></div>
+                </form>
+        </div>
+>>>>>>> main
     </>
   );
 };
