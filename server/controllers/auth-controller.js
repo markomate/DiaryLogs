@@ -2,44 +2,45 @@ import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const signUp = (req, res) => {
-  const newUser = new User(req.body);
+export const signUp = async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
 
-  newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+    const user = await newUser.save();
 
-  newUser.save((err, user) => {
-    if (err) {
-      res.status(500);
-      return res.json({ error: err.message });
-    } else {
-      res.status(201);
-      const token = jwt.sign(
-        { username: user.username, email: user.email, id: user._id },
-        process.env.SECRET_KEY
-      );
-      return res.json({ username: user.username, jwt: token });
-    }
-  });
+    const token = jwt.sign(
+      { username: user.username, email: user.email, id: user._id },
+      process.env.SECRET_KEY
+    );
+    res.status(201);
+    return res.json({ username: user.username, jwt: token });
+  } catch (err) {
+    res.status(500);
+    return res.json({ error: err.message });
+  }
 };
 
-export const signIn = (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (err) {
-      res.status(500);
-      return res.json({ error: err.message });
-    }
+export const signIn = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
     if (!user || !bcrypt.compareSync(req.body.password, user.hash_password)) {
       res.status(400);
       return res.json({ error: "Authentication failed" });
-    } else {
-      res.status(200);
-      const token = jwt.sign(
-        { username: user.username, email: user.email, id: user._id },
-        process.env.SECRET_KEY
-      );
-      return res.json({ username: user.username, jwt: token });
     }
-  });
+
+    const token = jwt.sign(
+      { username: user.username, email: user.email, id: user._id },
+      process.env.SECRET_KEY
+    );
+
+    res.status(200);
+    return res.json({ username: user.username, jwt: token });
+  } catch (err) {
+    res.status(500);
+    return res.json({ error: err.message });
+  }
 };
 
 export const loginRequired = (req, res, next) => {
