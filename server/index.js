@@ -18,13 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.set('strictQuery', false);
-mongoose.connect(dbConn, {}, (err) => {
-  if (err) {
-    console.log(err, "Database error!");
-  } else {
-    console.log("Connected to the database!");
-  }
-});
+try {
+  await mongoose.connect(dbConn);
+  console.log("Connected to the database!");
+} catch (error) {
+  console.log(error, "Database error!");
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);

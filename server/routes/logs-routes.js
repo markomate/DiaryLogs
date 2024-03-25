@@ -4,7 +4,7 @@ import {getLogs, getLog, createLog, removeLog, updateLog} from '../controllers/l
 
 const router = express.Router()
 
-// router.use(loginRequired)
+router.use(loginRequired)
 
 router.get("/logs", getLogs)
 

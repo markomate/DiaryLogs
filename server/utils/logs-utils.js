@@ -11,7 +11,7 @@ export const addLog = (req) => {
   return Log(req.body)
 }
 
-export const deleteLog = (id) => Log.findByIdAndRemove(id)
+export const deleteLog = (id) => Log.findByIdAndDelete(id)
 
 export const changeLog = (id, body) => {
   let date = Date.now()
