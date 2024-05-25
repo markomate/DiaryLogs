@@ -7,5 +7,6 @@ export async function signUp(data){
 
 export async function signIn(data){
   const response = await diarylogsAPI.post('/auth/signin', data)
+  // console.log(response.data)
   return response.data
 }

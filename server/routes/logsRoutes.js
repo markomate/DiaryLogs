@@ -1,10 +1,10 @@
 import express from "express"
-import { loginRequired } from "../controllers/auth-controller.js"
-import {getLogs, getLog, createLog, removeLog, updateLog} from '../controllers/logs-controller.js'
+import { loginRequired } from "../controllers/authController.js"
+import {getLogs, getLog, createLog, removeLog, updateLog} from '../controllers/logsController.js'
 
 const router = express.Router()
 
-router.use(loginRequired)
+// router.use(loginRequired)
 
 router.get("/logs", getLogs)
 
