@@ -1,4 +1,4 @@
-import {getAllLogs, getLogById, addLog, deleteLog, changeLog} from '../utils/logs-utils.js'
+import {getAllLogs, getLogById, addLog, deleteLog, changeLog} from '../utils/logsUtils.js'
 
 export const getLogs = async (req, res) => {
   try {

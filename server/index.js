@@ -3,9 +3,11 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import router from './routes/logs-routes.js'
-import { authRouter } from "./routes/auth-routes.js"
+import router from './routes/logsRoutes.js'
+import { authRouter } from "./routes/authRoutes.js"
 import jwt from 'jsonwebtoken'
+import passport from "passport";
+import { localSignin } from "./services/localStratergy.js";
 
 dotenv.config();
 
@@ -16,6 +18,8 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(passport.initialize());
+passport.use(localSignin)
 
 mongoose.set('strictQuery', false);
 try {
