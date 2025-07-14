@@ -22,13 +22,16 @@ export const signUp = async (req, res) => {
 };
 
 export const signIn = async (req, res) => {
+  console.log("THIS WORKED!!!")
+
+  console.log(req.body)
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    if (!user || !bcrypt.compareSync(req.body.password, user.hash_password)) {
-      res.status(400);
-      return res.json({ error: "Authentication failed" });
-    }
+    // if (!user || !bcrypt.compareSync(req.body.password, user.hash_password)) {
+    //   res.status(400);
+    //   return res.json({ error: "Authentication failed" });
+    // }
 
     const token = jwt.sign(
       { username: user.username, email: user.email, id: user._id },
@@ -49,6 +52,6 @@ export const loginRequired = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    return res.json({ error: "Unauthorised operation" });
+    return res.json({ error: "Unauthorised operation!" });
   }
 };
